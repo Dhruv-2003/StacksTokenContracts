@@ -24,7 +24,6 @@
   account1)
 
 ;; returns the token balance for account2
-
 (ft-get-balance token
   account2)
 
@@ -33,10 +32,8 @@
    u50 account2)
 
 ;; returns the token balance for account2
-
 (ft-get-balance token
   account2)
 
 ;; returns the total token Supply 
-
 (ft-get-supply token)

@@ -1,45 +1,35 @@
 ;; NFT EXAMPLE
 
-(define-non-fungible-token stackaroo int)
+(define-non-fungible-token nftStacks int)
 
-(define-constant owner1 'SZ2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKQ9H6DPR)
+(define-constant owner1 'ST3MNTK3HEQ8GTSB6SNWQVN84VPKG4D5Q8TS5JD45)
 
-(define-constant owner2 'TZ2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKQ9H6DPR)
+(define-constant owner2 'ST3A6TKJDWW4V8Q7NW06E3ZDBX3F5V5A27KXRHAQF)
 
+;; Mint asset 10 to owner1
+(nft-mint? nftStacks 10 owner1)
 
-(nft-mint? stackaroo 42 owner1)
+;; Asset '10' is now owned by owner1
+(nft-get-owner? nftStacks 10)
 
-;; Asset '42' is now owned by owner1
+;; Asset '2' is not owned by anybody:
+(nft-get-owner? nftStacks 2)
 
-(nft-get-owner? stackaroo 42)
+;; Mint Asset 2 to owner2 
+(nft-mint? nftStacks 2 owner2)
 
-;; Asset '13' is not owned by anybody:
+;; Asset '2' is now owned by owner2:
+(nft-get-owner? nftStacks 2)
 
-(nft-get-owner? stackaroo 13)
-
-(nft-mint? stackaroo 13 owner2)
-
-;; Asset '13' is now owned by owner2:
-
-(nft-get-owner? stackaroo 13)
-
-;; Transfer ownership of '42' to owner2:
-
-(nft-transfer? stackaroo 42 
+;; Transfer ownership of '10' to owner2:
+(nft-transfer? nftStacks 10 
   owner1 owner2)
 
-;; Asset '42' is now owned by owner2
+;; Asset '10' is now owned by owner2
+(nft-get-owner? nftStacks 10)
 
-(nft-get-owner? stackaroo 42)
+;; Burnt the Asset 10 from owner2
+(nft-burn? nftStacks 10 owner2)
 
-;; Unit test validating the two assets have the same owner:
-
-(test= 
-  (nft-get-owner? stackaroo 13)
-  (nft-get-owner? stackaroo 42))
-
-(nft-burn? stackaroo 42 owner2)
-
-;; The asset '42' is no longer owned by anybody:
-
-(nft-get-owner? stackaroo 42)
+;; The asset '10' is no longer owned by anybody:
+(nft-get-owner? nftStacks 10)
